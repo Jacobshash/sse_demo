@@ -23,9 +23,9 @@ public class SseRedisController {
 
     private final BizService bizService;
 
-    @GetMapping("/sse/sse-emitter/redis/{userId}")
+    @GetMapping(path = "/sse/sse-emitter/redis/{userId}", produces = "text/event-stream")
     public SseEmitter getSseEmitterSseStreamByRedis(@PathVariable("userId") String userId) {
-        this.emitter = new SseEmitter();
+        this.emitter = new SseEmitter(-1L);
         try {
             bizService.sendDataToClient(emitter, userId);
         } catch (Exception ex) {
@@ -50,7 +50,7 @@ public class SseRedisController {
     @GetMapping("/sse/sse-emitter/mock/{userId}")
     public ResponseEntity<Void> mockSseData(@PathVariable("userId") String userId) {
         try {
-            bizService.mockSseData(userId,emitter);
+            bizService.mockSseData(userId,this.emitter);
         } catch (IOException e) {
             log.error("Error sending data to client", e);
         }
