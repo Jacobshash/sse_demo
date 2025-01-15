@@ -1,6 +1,6 @@
 package com.loltoulan.sse_demo.service.impl;
 
-import com.loltoulan.sse_demo.service.BizService;
+import com.loltoulan.sse_demo.service.SseRedisService;
 import com.loltoulan.sse_demo.util.RedisUtils;
 
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.Objects;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class BizServiceImpl implements BizService {
+public class SseRedisServiceImpl implements SseRedisService {
 
     private final RedisUtils redisUtils;
     private static final String prefix = "biz:funds:rate:";

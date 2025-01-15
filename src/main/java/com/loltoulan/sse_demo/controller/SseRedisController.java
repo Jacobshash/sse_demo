@@ -1,6 +1,6 @@
 package com.loltoulan.sse_demo.controller;
 
-import com.loltoulan.sse_demo.service.BizService;
+import com.loltoulan.sse_demo.service.SseRedisService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,13 +21,13 @@ public class SseRedisController {
 
     private SseEmitter emitter;
 
-    private final BizService bizService;
+    private final SseRedisService sseRedisService;
 
     @GetMapping(path = "/sse/sse-emitter/redis/{userId}", produces = "text/event-stream")
     public SseEmitter getSseEmitterSseStreamByRedis(@PathVariable("userId") String userId) {
         this.emitter = new SseEmitter(-1L);
         try {
-            bizService.sendDataToClient(emitter, userId);
+            sseRedisService.sendDataToClient(emitter, userId);
         } catch (Exception ex) {
             log.error("Error sending data to client", ex);
         }
@@ -50,7 +50,7 @@ public class SseRedisController {
     @GetMapping("/sse/sse-emitter/mock/{userId}")
     public ResponseEntity<Void> mockSseData(@PathVariable("userId") String userId) {
         try {
-            bizService.mockSseData(userId,this.emitter);
+            sseRedisService.mockSseData(userId,this.emitter);
         } catch (IOException e) {
             log.error("Error sending data to client", e);
         }

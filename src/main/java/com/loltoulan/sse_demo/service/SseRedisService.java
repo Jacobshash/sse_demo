@@ -4,7 +4,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
 
-public interface BizService {
+public interface SseRedisService {
 
     void sendDataToClient(SseEmitter emitter, String userId) throws IOException;
 
