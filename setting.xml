@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <localRepository>D:\Learn\develop_tool\maven\repository</localRepository>
+
+    <!-- 阿里云的中央仓库 -->
+    <mirrors>
+        <mirror>
+            <id>aliyun</id>
+            <name>aliyun</name>
+            <mirrorOf>central</mirrorOf>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </mirror>
+    </mirrors>
+
+
+    <!-- 配置 jdk 版本 -->
+    <profiles>
+
+        <profile>
+            <id>jdk23</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <jdk>23</jdk>
+            </activation>
+            <properties>
+                <maven.compiler.source>23</maven.compiler.source>
+                <maven.compiler.target>23</maven.compiler.target>
+                <maven.compiler.compilerVersion>23</maven.compiler.compilerVersion>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>jdk17</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <jdk>17</jdk>
+            </activation>
+            <properties>
+                <maven.compiler.source>17</maven.compiler.source>
+                <maven.compiler.target>17</maven.compiler.target>
+                <maven.compiler.compilerVersion>17</maven.compiler.compilerVersion>
+            </properties>
+        </profile>
+
+    </profiles>
+
+</settings>
