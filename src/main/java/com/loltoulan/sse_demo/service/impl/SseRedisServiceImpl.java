@@ -32,8 +32,8 @@ public class SseRedisServiceImpl implements SseRedisService {
     }
 
     @Override
-    public void mockSseData(String userId, SseEmitter emitter) throws IOException {
-        redisUtils.set(prefix + userId, String.valueOf(Math.random() * 100));
+    public void mockSseData(String userId, SseEmitter emitter, String data) throws IOException {
+        redisUtils.set(prefix + userId, data);
         sendDataToClient(emitter, userId);
     }
 

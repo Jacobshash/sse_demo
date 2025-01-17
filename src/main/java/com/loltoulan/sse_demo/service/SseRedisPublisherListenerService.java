@@ -8,6 +8,6 @@ public interface SseRedisPublisherListenerService {
 
     void sendDataToClient(SseEmitter emitter, String userId) throws IOException;
 
-    void mockSseData(String userId);
+    void mockSseData(String userId, String data);
 
 }

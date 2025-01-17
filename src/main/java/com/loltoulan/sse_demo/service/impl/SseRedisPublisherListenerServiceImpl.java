@@ -34,8 +34,8 @@ public class SseRedisPublisherListenerServiceImpl implements SseRedisPublisherLi
     }
 
     @Override
-    public void mockSseData(String userId) {
-        redisUtils.set(prefix + userId, String.valueOf(Math.random() * 100));
+    public void mockSseData(String userId, String data) {
+        redisUtils.set(prefix + userId, data);
         bizEventPublisher.publishEvent(userId);
     }
 }

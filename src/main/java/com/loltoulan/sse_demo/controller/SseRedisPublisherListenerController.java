@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 @RestController
@@ -48,9 +45,9 @@ public class SseRedisPublisherListenerController {
     }
 
     @GetMapping("/sse/sse-emitter/pub-lis/mock/{userId}")
-    public ResponseEntity<Void> mockSseData(@PathVariable("userId") String userId) {
+    public ResponseEntity<Void> mockSseData(@PathVariable("userId") String userId, @RequestParam("data") String data) {
         try {
-            sseRedisPublisherListenerService.mockSseData(userId);
+            sseRedisPublisherListenerService.mockSseData(userId,data);
         } catch (Exception e) {
             log.error("Error sending data to client", e);
         }
