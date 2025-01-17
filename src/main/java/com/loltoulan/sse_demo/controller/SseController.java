@@ -36,14 +36,14 @@ public class SseController {
         nonBlockingService.execute(() -> {
             // 这里模拟数据发送给客户端的逻辑
             try {
-                emitter.send("start to send Data");
+                emitter.send("Start to send Data");
                 Thread.sleep(1000);
 
                 for (int i = 0; i < 10; i++) {
                     emitter.send("Data: " + i);
                     Thread.sleep(1000);
                 }
-                emitter.send("complete send data");
+                emitter.send("Complete send data");
                 emitter.complete();
             } catch (Exception ex) {
                 emitter.completeWithError(ex);
