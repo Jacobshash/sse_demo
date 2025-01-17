@@ -9,4 +9,6 @@ public interface SseRedisService {
     void sendDataToClient(SseEmitter emitter, String userId) throws IOException;
 
     void mockSseData(String userId, SseEmitter emitter, String data) throws IOException;
+
+    void clearRedisByUserId(String userId);
 }

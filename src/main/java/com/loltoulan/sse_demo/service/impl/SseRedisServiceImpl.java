@@ -37,4 +37,9 @@ public class SseRedisServiceImpl implements SseRedisService {
         sendDataToClient(emitter, userId);
     }
 
+    @Override
+    public void clearRedisByUserId(String userId) {
+        redisUtils.delete(prefix + userId);
+    }
+
 }

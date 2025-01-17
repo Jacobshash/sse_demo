@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
+import java.util.Objects;
 
 @RestController
 @Slf4j
@@ -33,11 +34,17 @@ public class SseRedisController {
         return emitter;
     }
 
-    @GetMapping("/sse/sse-emitter/redis/close")
-    public ResponseEntity<Void> close() {
+    @GetMapping("/sse/sse-emitter/redis/close/{userId}")
+    public ResponseEntity<Void> close(@PathVariable("userId") String userId) {
         try {
-            emitter.send("complete");
+            if (Objects.isNull(this.emitter)) {
+                log.info("emitter is null");
+                return ResponseEntity.ok().build();
+            }
+            // emitter.send("close connection");
             this.emitter.complete();
+            this.emitter = null;
+            sseRedisService.clearRedisByUserId(userId);
         } catch (Exception e) {
             log.error("Error closing emitter", e);
             this.emitter.completeWithError(e);
